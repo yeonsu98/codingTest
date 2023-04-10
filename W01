@@ -12,3 +12,26 @@ def solution(n, m, section):
             answer += 1
             
     return answer
+
+# https://school.programmers.co.kr/learn/courses/30/lessons/159994
+
+def solution(cards1, cards2, goal):
+    answer = 'Yes'
+    idx1 = idx2 = -1
+
+    for g in goal:
+        if g in cards1:
+            idx1 += 1
+            if idx1 != cards1.index(g):
+                answer = 'No'
+                break
+        elif g in cards2:
+            idx2 += 1
+            if idx2 != cards2.index(g):
+                answer = 'No'
+                break
+        else: 
+            answer = 'No'
+            break
+
+    return answer

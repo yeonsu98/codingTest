@@ -55,3 +55,24 @@ def solution(t, p):
             answer += 1
         
     return answer
+
+# https://school.programmers.co.kr/learn/courses/30/lessons/150370
+
+def solution(today, terms, privacies):
+    import datetime
+    from dateutil.relativedelta import relativedelta
+    
+    format = '%Y.%m.%d'
+    today_date = datetime.datetime.strptime(today, format)
+    answer = []
+    
+    for i, privacy in enumerate(privacies):
+        p_date = datetime.datetime.strptime(privacy.split()[0], format)
+        p_name = privacy.split()[1]
+        
+        t_mon = int([term.split()[1] for term in terms if term.split()[0] == p_name][0])
+        
+        if today_date >= p_date + relativedelta(months=t_mon):
+            answer.append(i+1)
+        
+    return answer

@@ -66,11 +66,17 @@ def solution(today, terms, privacies):
     today_date = datetime.datetime.strptime(today, format)
     answer = []
     
-    for i, privacy in enumerate(privacies):
-        p_date = datetime.datetime.strptime(privacy.split()[0], format)
-        p_name = privacy.split()[1]
+    term = dict()
+    for ts in terms:
+        t = ts.split()
+        term[t[0]] = t[1]
         
-        t_mon = int([term.split()[1] for term in terms if term.split()[0] == p_name][0])
+    for i, privacy in enumerate(privacies):
+        p = privacy.split()
+        p_date = datetime.datetime.strptime(p[0], format)
+        p_name = p[1]
+        
+        t_mon = int(term[p_name])
         
         if today_date >= p_date + relativedelta(months=t_mon):
             answer.append(i+1)

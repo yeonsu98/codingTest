@@ -33,12 +33,14 @@ def solution(cards1, cards2, goal):
 
 def solution(s, skip, index):
     answer = ''
-    alpha = [chr(i) for i in range(97, 123) if chr(i) not in skip]
+    alpha = [chr(i) for i in range(ord('a'), ord('z')+1) if chr(i) not in skip]
     
     for c in s:
         answer += alpha[(alpha.index(c) + index) % len(alpha)]
         
     return answer
+
+# 코드의 가독성 높이는 방향으로 짜기 !
 
 # https://school.programmers.co.kr/learn/courses/30/lessons/147355
 

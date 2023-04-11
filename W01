@@ -39,7 +39,6 @@ def solution(s, skip, index):
         answer += alpha[(alpha.index(c) + index) % len(alpha)]
         
     return answer
-
 # 코드의 가독성 높이는 방향으로 짜기 !
 
 # https://school.programmers.co.kr/learn/courses/30/lessons/147355
@@ -81,4 +80,26 @@ def solution(today, terms, privacies):
         if today_date >= p_date + relativedelta(months=t_mon):
             answer.append(i+1)
         
+    return answer
+
+# 라이브러리 사용하지 않고 풀기
+def solution(today, terms, privacies):
+    answer = []
+    t_date = list(map(int, today.split('.')))
+    t_day = t_date[0]*12*28 + t_date[1]*28 + t_date[2]
+    
+    term = dict()
+    for ts in terms:
+        t = ts.split()
+        term[t[0]] = t[1]
+        
+    for i, privacy in enumerate(privacies):
+        p = privacy.split()
+        p_date = list(map(int, p[0].split('.')))
+        p_day = p_date[0]*12*28 + p_date[1]*28 + p_date[2]
+        mon = int(term[p[1]])
+        
+        if t_day >= p_day + 28 * mon:
+            answer.append(i+1)
+            
     return answer

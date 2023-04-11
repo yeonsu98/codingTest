@@ -17,24 +17,19 @@ def solution(n, m, section):
 
 def solution(cards1, cards2, goal):
     answer = 'Yes'
-    idx1 = idx2 = -1
+    idx1 = idx2 = 0
 
     for g in goal:
-        if g in cards1:
+        if (idx1 < len(cards1)) and cards1[idx1] == g:
             idx1 += 1
-            if idx1 != cards1.index(g):
-                answer = 'No'
-                break
-        elif g in cards2:
-            idx2 += 1
-            if idx2 != cards2.index(g):
-                answer = 'No'
-                break
+        elif (idx2 < len(cards2)) and cards2[idx2] == g:
+            idx1 += 1
         else: 
             answer = 'No'
             break
 
     return answer
+# O(n)으로 풀 수 있도록 수정
 
 # https://school.programmers.co.kr/learn/courses/30/lessons/155652
 
@@ -46,3 +41,4 @@ def solution(s, skip, index):
         answer += alpha[(alpha.index(c) + index) % len(alpha)]
         
     return answer
+

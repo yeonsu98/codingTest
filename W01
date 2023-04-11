@@ -42,3 +42,16 @@ def solution(s, skip, index):
         
     return answer
 
+# https://school.programmers.co.kr/learn/courses/30/lessons/147355
+
+def solution(t, p):
+    answer = 0
+    tmp = 0
+    
+    for i in range(len(t)-len(p)+1):
+        tmp = int(t[i:i+len(p)])
+        
+        if tmp <= int(p):
+            answer += 1
+        
+    return answer

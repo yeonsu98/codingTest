@@ -83,23 +83,28 @@ def solution(today, terms, privacies):
     return answer
 
 # 라이브러리 사용하지 않고 풀기
+def cal_day(date): # 전체 일 수 구하는 함수
+    date_arr = list(map(int, date.split('.')))
+    day = date_arr[0]*12*28 + date_arr[1]*28 + date_arr[2]
+    return day
+
 def solution(today, terms, privacies):
     answer = []
-    t_date = list(map(int, today.split('.')))
-    t_day = t_date[0]*12*28 + t_date[1]*28 + t_date[2]
+    t_day = cal_day(today)
     
     term = dict()
     for ts in terms:
         t = ts.split()
-        term[t[0]] = t[1]
+        term[t[0]] = int(t[1])
         
-    for i, privacy in enumerate(privacies):
+    for i, privacy in enumerate(privacies, 1):
+        # enumerate(arg1, arg2) => arg2로 시작값 세팅
         p = privacy.split()
-        p_date = list(map(int, p[0].split('.')))
-        p_day = p_date[0]*12*28 + p_date[1]*28 + p_date[2]
-        mon = int(term[p[1]])
+        p_day = cal_day(p[0])
+        mon = term[p[1]]
         
         if t_day >= p_day + 28 * mon:
-            answer.append(i+1)
+            answer.append(i)
             
     return answer
+# 반복되는 과정은 함수로 따로 지정

@@ -16,19 +16,17 @@ def solution(n, m, section):
 # https://school.programmers.co.kr/learn/courses/30/lessons/159994
 
 def solution(cards1, cards2, goal):
-    answer = 'Yes'
     idx1 = idx2 = 0
 
     for g in goal:
         if (idx1 < len(cards1)) and cards1[idx1] == g:
             idx1 += 1
         elif (idx2 < len(cards2)) and cards2[idx2] == g:
-            idx1 += 1
+            idx2 += 1
         else: 
-            answer = 'No'
-            break
+            return 'No'
 
-    return answer
+    return 'Yes'
 # O(n)으로 풀 수 있도록 수정
 
 # https://school.programmers.co.kr/learn/courses/30/lessons/155652

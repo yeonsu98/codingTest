@@ -35,3 +35,14 @@ def solution(cards1, cards2, goal):
             break
 
     return answer
+
+# https://school.programmers.co.kr/learn/courses/30/lessons/155652
+
+def solution(s, skip, index):
+    answer = ''
+    alpha = [chr(i) for i in range(97, 123) if chr(i) not in skip]
+    
+    for c in s:
+        answer += alpha[(alpha.index(c) + index) % len(alpha)]
+        
+    return answer

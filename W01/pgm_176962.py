@@ -3,42 +3,29 @@
 def solution(plans):
     answer = []
     plans.sort(key = lambda x: x[1])
-    stop = []
     
     for plan in plans:
         time = list(map(int, plan[1].split(':')))
-        plan[1] = time[0]*60 + time[1] 
-        plan[2] = int(plan[2])
-        
-    while plans:
-        if len(plans) > 1:
-            n1, s1, p1 = plans[0]
-            n2, s2, p2 = plans[1]
-            
-            t1 = s1 + p1
-            t2 = s2
-            
-            if t1 > t2: # 현재 과제 중단 stop에 추가
-                stop.append([t1 - t2, n1])
-                plans.pop(0)
-            else: # 현재 과제 끝
-                answer.append(n1)
-                plans.pop(0)
-                res = t2 - t1
-                
-                while stop: # stop한 과제 재개
-                    print(stop)
-                    if res >= stop[-1][0]: 
-                        res -= stop[-1][0]
-                        answer.append(stop.pop()[1])
-                    else:
-                        stop[-1][0] -= res
-                        break
-        else:
-            answer.append(plans.pop(0)[0])
-    
-    stop.sort(reverse=True)
-    for s in stop:
-        answer.append(s[1])
+        plan[1] = time[0]*60 + time[1] # start
+        plan[2] = int(plan[2])         # playtime
 
+    stop = []             # 중단된 과제 
+    current = plans[0][1] # 현재 시간
+    
+    for i in range(len(plans)-1):
+        np, _, tp = plans.pop(0)
+        stop.append([np, tp])
+        while stop:
+            ns, ts = stop.pop()
+            if current + ts <= plans[0][1]:
+                answer.append(ns)
+                current += ts
+            else:
+                current = plans[0][1]
+                stop.append([ns, current + ts - plans[0][1]])
+                break
+    
+    answer.append(plans[-1][0])
+    answer.extend(list(s[0] for s in stop[::-1]))
+    
     return answer

@@ -22,7 +22,7 @@ def solution(plans):
                 answer.append(ns)
                 current += ts
             else:
-                res = current + ts - plans[0][1] # 남은 시간
+                res = (current + ts) - plans[0][1] # 남은 시간
                 current += ts - res
                 stop.append([ns, res])
                 break

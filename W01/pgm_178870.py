@@ -5,8 +5,7 @@ def solution(sequence, k):
     ssum = 0
     l = 0
     r = -1
-    answer = []
-    min_len = float("inf")
+    answer = [0, float("inf")]
     
     while True:
         if ssum < k:
@@ -22,8 +21,7 @@ def solution(sequence, k):
             l += 1
 
         if ssum == k:
-            if min_len > r-l:
-                min_len = min(min_len, r-l)
+            if answer[1]-answer[0] > r-l:
                 answer = [l, r]
             
     return answer

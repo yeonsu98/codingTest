@@ -15,17 +15,18 @@ def solution(plans):
     for i in range(len(plans)-1):
         np, _, tp = plans.pop(0)
         stop.append([np, tp])
+        
         while stop:
             ns, ts = stop.pop()
             if current + ts <= plans[0][1]:
                 answer.append(ns)
                 current += ts
             else:
-                current = plans[0][1]
-                stop.append([ns, current + ts - plans[0][1]])
+                res = current + ts - plans[0][1] # 남은 시간
+                current += ts - res
+                stop.append([ns, res])
                 break
-    
+        
     answer.append(plans[-1][0])
     answer.extend(list(s[0] for s in stop[::-1]))
-    
     return answer

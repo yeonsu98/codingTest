@@ -61,3 +61,11 @@ def solution(board):
             q.append([tr, tc, cnt+1])
     
     return -1
+
+[
+    "...D..R",
+    ".D.D...",
+    "....D.D",
+    "D....D.",
+    "..D...."
+    ]
